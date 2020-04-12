@@ -1,3 +1,5 @@
+import 'package:delivery_app/widgets/line_path.dart';
+import 'package:delivery_app/widgets/section_separator.dart';
 import 'package:flutter/material.dart';
 
 class DeliveryFilterSheet extends StatefulWidget {
@@ -6,42 +8,72 @@ class DeliveryFilterSheet extends StatefulWidget {
 }
 
 class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
+  String selectedRoute = "1";
+
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-        initialChildSize: 0.30,
-        maxChildSize: 0.5,
+        minChildSize: 0,
+        expand: true,
+        initialChildSize: 0.3,
+        maxChildSize: 1,
         builder: (BuildContext context, ScrollController scrollController) {
           return Container(
             child: Column(
               children: <Widget>[
                 SizedBox(
-                    height: 100.0,
+                    height: 112.0,
                     child: Padding(
                       padding: EdgeInsets.only(
-                          top: 40, left: 30, right: 30, bottom: 10),
+                          top: 40, left: 30, right: 0, bottom: 0),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           Text(
                             "Route",
-                            style: TextStyle(color: Colors.white, fontSize: 22),
+                            style: TextStyle(color: Colors.white, fontSize: 28),
                           ),
                           Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 10,
-                              itemBuilder: (BuildContext ctxt, int index) {
-                                return new Text(
-                                  "Route",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                            child: ListView.separated(
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return SizedBox(
+                                  width: 24,
                                 );
+                              },
+                              padding: EdgeInsets.only(top: 12, bottom: 12),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 7,
+                              itemBuilder: (BuildContext ctxt, int index) {
+                                if (index == 0) {
+                                  return SizedBox(
+                                    width: 56,
+                                  );
+                                }
+
+                                if (index == 2) {
+                                  return Container(
+                                    child: CustomPaint(painter: LinePath()),
+                                  );
+                                }
+
+                                String indexString =
+                                    (index < 2 ? "${index}" : "${index - 1}");
+                                if (index == 4) {
+                                  indexString = "${index - 1} - ${index}";
+                                }
+
+                                return rounderButton(indexString);
                               },
                             ),
                           )
                         ],
                       ),
                     )),
+                Container(
+                  child: CustomPaint(painter: SectionSeparator()),
+                ),
                 Text("OUTRA SECAO")
               ],
             ),
@@ -59,5 +91,34 @@ class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
                     ])),
           );
         });
+  }
+
+  Widget rounderButton(String index) {
+    bool isSelected = (index == selectedRoute);
+    double width = (index.length == 1 ? 35 : 65);
+    Color backgroundColor = (isSelected ? Colors.white : Colors.transparent);
+    Color textColor =
+        (isSelected ? Color.fromRGBO(111, 42, 244, 1) : Colors.white);
+
+    return Container(
+      padding: EdgeInsets.only(bottom: 10),
+      width: width,
+      child: FlatButton(
+        color: backgroundColor,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(10.0),
+            side: BorderSide(color: Colors.white, width: 1)),
+        child: Text(
+          index,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: textColor),
+        ),
+        onPressed: () {
+          setState(() {
+            this.selectedRoute = index;
+          });
+        },
+      ),
+    );
   }
 }
