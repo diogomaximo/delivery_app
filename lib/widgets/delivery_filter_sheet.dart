@@ -1,3 +1,4 @@
+import 'package:delivery_app/widgets/bottom_buttons.dart';
 import 'package:delivery_app/widgets/line_path.dart';
 import 'package:delivery_app/widgets/section_separator.dart';
 import 'package:flutter/material.dart';
@@ -9,72 +10,114 @@ class DeliveryFilterSheet extends StatefulWidget {
 
 class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
   String selectedRoute = "1";
+  var hours = { "1": "11:00", "4": "12:00", "6": "13:00", "8": "14:00" };
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
         minChildSize: 0,
         expand: true,
-        initialChildSize: 0.3,
+        initialChildSize: 0.34,
         maxChildSize: 1,
         builder: (BuildContext context, ScrollController scrollController) {
           return Container(
             child: Column(
               children: <Widget>[
+
                 SizedBox(
-                    height: 112.0,
+                    height: 150.0,
                     child: Padding(
                       padding: EdgeInsets.only(
-                          top: 40, left: 30, right: 0, bottom: 0),
+                          top: 40, left: 0, right: 0, bottom: 0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text(
-                            "Route",
-                            style: TextStyle(color: Colors.white, fontSize: 28),
-                          ),
                           Expanded(
                             child: ListView.separated(
                               separatorBuilder:
                                   (BuildContext context, int index) {
                                 return SizedBox(
-                                  width: 24,
+                                  width: 20,
                                 );
                               },
-                              padding: EdgeInsets.only(top: 12, bottom: 12),
+                              padding: EdgeInsets.only(top: 12, bottom: 0),
                               scrollDirection: Axis.horizontal,
-                              itemCount: 7,
+                              itemCount: 10,
                               itemBuilder: (BuildContext ctxt, int index) {
-                                if (index == 0) {
-                                  return SizedBox(
-                                    width: 56,
+                                if (index == 0){
+                                  return Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: Text(
+                                          "Route",
+                                          style: TextStyle(color: Colors.white, fontSize: 28),
+                                        ),
+                                      ),
+                                      Container(
+                                      padding: EdgeInsets.only(top: 25),
+                                      child: CustomPaint(painter: SectionSeparator(10)),
+                                      )
+                                    ],
                                   );
                                 }
 
-                                if (index == 2) {
-                                  return Container(
-                                    child: CustomPaint(painter: LinePath()),
+                                if (index == 1) {
+                                  return SizedBox(
+                                    width: 20,
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 58),
+//                                      color: Colors.red,
+                                      child: CustomPaint(painter: SectionSeparator(2)),
+                                    ),
+                                  );
+                                }
+
+                                if (index == 3) {
+                                  return Column(
+                                    children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.only(top: 58),
+                                      ),
+                                      Container(
+                                        child: CustomPaint(painter: SectionSeparator(-19, isPainterBigger: true, extraLineHeight: -44, showVerticalLine: true)),
+                                      ),
+                                    ],
                                   );
                                 }
 
                                 String indexString =
                                     (index < 2 ? "${index}" : "${index - 1}");
                                 if (index == 4) {
-                                  indexString = "${index - 1} - ${index}";
+                                  indexString = "${index - 2} - ${index - 1}";
                                 }
 
-                                return rounderButton(indexString);
+                                return Column(
+                                  children: <Widget>[
+                                  rounderButton(indexString),
+                                    Container(
+                                      child: CustomPaint(painter: SectionSeparator(index == 4 ? 15 : 0,  extraLineHeight: (hours.containsKey(indexString)? 0 : 3), showVerticalLine: true )),
+                                    ),
+                                  SizedBox(
+                                height: 16,
+                                ),
+                                    hourText(indexString),
+                                  ],
+                                );
                               },
                             ),
                           )
                         ],
                       ),
                     )),
-                Container(
-                  child: CustomPaint(painter: SectionSeparator()),
-                ),
-                Text("OUTRA SECAO")
+                Spacer(),
+                BottomButtons(),
+
+//                Container(
+//                  child: CustomPaint(painter: SectionSeparator()),
+//                ),
+//                Text("OUTRA SECAO")
               ],
             ),
             decoration: new BoxDecoration(
@@ -91,6 +134,16 @@ class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
                     ])),
           );
         });
+  }
+
+  Widget hourText(String indexString){
+    if (!hours.containsKey(indexString)){
+      return SizedBox();
+    }
+
+    return Text(hours[indexString], style: TextStyle(
+      color: Colors.white,
+    ),);
   }
 
   Widget rounderButton(String index) {
