@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class RoutesList extends StatefulWidget {
   int index;
   int selectedRoute;
+  Function onSelectRoute;
 
-  RoutesList();
+  RoutesList(this.onSelectRoute);
 
   @override
   _RoutesListState createState() => _RoutesListState();
@@ -48,7 +49,8 @@ class _RoutesListState extends State<RoutesList> {
                                   TextStyle(color: Colors.white, fontSize: 28),
                             ),
                           ),
-                          Container(
+                          AnimatedContainer(
+                            duration: Duration(milliseconds: 960),
                             padding: EdgeInsets.only(top: 25),
                             child: CustomPaint(painter: SectionSeparator(10)),
                           )
@@ -95,6 +97,7 @@ class _RoutesListState extends State<RoutesList> {
                         RounderButton(selectedRoute, indexString, (){
                           setState(() {
                             this.selectedRoute = indexString;
+                            widget.onSelectRoute(indexString);
                           });
                         }),
 //                        rounderButton(indexString),

@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 
 class BottomButtons extends StatefulWidget {
   @override
+  Function changeMode;
+
+  BottomButtons(this.changeMode){
+
+  }
   _BottomButtonsState createState() => _BottomButtonsState();
 }
 
 class _BottomButtonsState extends State<BottomButtons> {
   String selectedOption = "Map";
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +69,7 @@ class _BottomButtonsState extends State<BottomButtons> {
         onPressed: () {
           setState(() {
             selectedOption = text;
+            widget.changeMode(selectedOption);
           });
         },
       ),

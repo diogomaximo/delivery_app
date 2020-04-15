@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
     return Stack(
       children: <Widget>[
         DeliveryMap(),
-        SizedBox.expand(child: DeliveryFilterSheet()),
+        Positioned(bottom: 0, child: DeliveryFilterSheet())
       ],
     );
   }
