@@ -19,7 +19,7 @@ class _RoutesListState extends State<RoutesList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 150.0,
+        height: 190.0,
         child: Padding(
           padding: EdgeInsets.only(top: 40, left: 0, right: 0, bottom: 0),
           child: Row(

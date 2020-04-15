@@ -1,10 +1,19 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class RounderButton extends StatefulWidget {
   String index;
   String selectedRoute;
   Function onSelectRoute;
-  RounderButton(this.selectedRoute, this.index, this.onSelectRoute );
+  Color borderColor;
+  double borderWidth;
+  Color textColor;
+
+  RounderButton(this.selectedRoute, this.index, this.onSelectRoute,
+      {this.borderColor = Colors.white, this.borderWidth = 1,
+        this.textColor = Colors.white,
+      } );
 
   @override
   _RounderButtonState createState() => _RounderButtonState();
@@ -17,7 +26,7 @@ class _RounderButtonState extends State<RounderButton> {
     double width = (widget.index.length == 1 ? 35 : 65);
     Color backgroundColor = (isSelected ? Colors.white : Colors.transparent);
     Color textColor =
-    (isSelected ? Color.fromRGBO(111, 42, 244, 1) : Colors.white);
+    (isSelected ? Color.fromRGBO(111, 42, 244, 1) : widget.textColor);
 
     return Container(
       padding: EdgeInsets.only(bottom: 10),
@@ -26,7 +35,7 @@ class _RounderButtonState extends State<RounderButton> {
         color: backgroundColor,
         shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(10.0),
-            side: BorderSide(color: Colors.white, width: 1)),
+            side: BorderSide(color: widget.borderColor, width: widget.borderWidth)),
         child: Text(
           widget.index,
           textAlign: TextAlign.center,

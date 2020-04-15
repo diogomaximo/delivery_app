@@ -6,7 +6,6 @@ import 'package:delivery_app/widgets/routes_list.dart';
 import 'package:flutter/material.dart';
 
 class DeliveryFilterSheet extends StatefulWidget {
-
   String selectedRoute = "1";
 
   DeliveryFilterSheet(this.selectedRoute);
@@ -64,12 +63,12 @@ class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
     return [
       RoutesList((routeString) {
         setState(() {
-          height = 720;
+          height = 840;
           isMapView = false;
         });
       }, widget.selectedRoute),
       (isMapView ? SizedBox.shrink() : RouteDetails()),
-      Spacer(),
+      (isMapView ? Spacer() : SizedBox.shrink()),
       BottomButtons((selectedOption) {
         setState(() {
           isMapView = selectedOption == "Map";
@@ -78,6 +77,7 @@ class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
       })
     ];
   }
+
 
   BoxDecoration mainContainerDecoration() {
     return BoxDecoration(
