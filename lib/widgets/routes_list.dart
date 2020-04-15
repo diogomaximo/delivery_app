@@ -4,17 +4,16 @@ import 'package:flutter/material.dart';
 
 class RoutesList extends StatefulWidget {
   int index;
-  int selectedRoute;
+  String selectedRoute;
   Function onSelectRoute;
 
-  RoutesList(this.onSelectRoute);
+  RoutesList(this.onSelectRoute, this.selectedRoute);
 
   @override
   _RoutesListState createState() => _RoutesListState();
 }
 
 class _RoutesListState extends State<RoutesList> {
-  String selectedRoute = "1";
   var hours = {"1": "11:00", "4": "12:00", "6": "13:00", "8": "14:00"};
 
   @override
@@ -94,9 +93,9 @@ class _RoutesListState extends State<RoutesList> {
 
                     return Column(
                       children: <Widget>[
-                        RounderButton(selectedRoute, indexString, (){
+                        RounderButton(widget.selectedRoute, indexString, (){
                           setState(() {
-                            this.selectedRoute = indexString;
+                            widget.selectedRoute = indexString;
                             widget.onSelectRoute(indexString);
                           });
                         }),

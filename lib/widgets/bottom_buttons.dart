@@ -13,7 +13,6 @@ class BottomButtons extends StatefulWidget {
 class _BottomButtonsState extends State<BottomButtons> {
   String selectedOption = "Map";
 
-
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -8,12 +8,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  String selectedRoute;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        DeliveryMap(),
-        Positioned(bottom: 0, child: DeliveryFilterSheet())
+        DeliveryMap((routeId){
+          setState(() {
+            selectedRoute = routeId;
+          });
+        }),
+        Positioned(bottom: 0, child: DeliveryFilterSheet(selectedRoute))
       ],
     );
   }
