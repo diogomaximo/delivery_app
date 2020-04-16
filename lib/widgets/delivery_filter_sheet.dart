@@ -67,7 +67,8 @@ class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
           isMapView = false;
         });
       }, widget.selectedRoute),
-      (isMapView ? SizedBox.shrink() : RouteDetails()),
+      RouteDetails(),
+//      (isMapView ? SizedBox.shrink() : RouteDetails()),
       (isMapView ? Spacer() : SizedBox.shrink()),
       BottomButtons((selectedOption) {
         setState(() {

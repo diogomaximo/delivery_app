@@ -9,6 +9,7 @@ class RounderButton extends StatefulWidget {
   Color borderColor;
   double borderWidth;
   Color textColor;
+  int size;
 
   RounderButton(this.selectedRoute, this.index, this.onSelectRoute,
       {this.borderColor = Colors.white, this.borderWidth = 1,

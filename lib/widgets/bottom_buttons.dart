@@ -18,6 +18,17 @@ class _BottomButtonsState extends State<BottomButtons> {
       height: 120,
       child: Container(
         decoration: new BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 20.0,
+                spreadRadius: 5.0,
+                offset: Offset(
+                  4.0, // horizontal, move right 10
+                  4.0, // vertical, move down 10
+                ),
+              )
+            ],
             borderRadius: new BorderRadius.only(
               topLeft: const Radius.circular(40.0),
               topRight: const Radius.circular(40.0),
