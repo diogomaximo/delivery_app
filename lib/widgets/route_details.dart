@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RouteDetails extends StatefulWidget {
+  String selectedOption;
+
+  RouteDetails(this.selectedOption);
+
+
   @override
   _RouteDetailsState createState() => _RouteDetailsState();
 }
@@ -25,7 +30,7 @@ class _RouteDetailsState extends State<RouteDetails> {
             children: <Widget>[
               RounderButton(
                 "1",
-                "2",
+                widget.selectedOption,
                     () {},
                 borderColor: buttonColor,
                 borderWidth: 2,

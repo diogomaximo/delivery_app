@@ -8,8 +8,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   String selectedRoute;
+  String viewMode = "Map";
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,10 @@ class _HomeState extends State<Home> {
         DeliveryMap((routeId){
           setState(() {
             selectedRoute = routeId;
+            viewMode = "List";
           });
         }),
-        Positioned(bottom: 0, child: DeliveryFilterSheet(selectedRoute))
+        Positioned(bottom: 0, child: DeliveryFilterSheet(selectedRoute, viewMode))
       ],
     );
   }

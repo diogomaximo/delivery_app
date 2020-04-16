@@ -3,7 +3,6 @@ import 'package:delivery_app/widgets/section_separator.dart';
 import 'package:flutter/material.dart';
 
 class RoutesList extends StatefulWidget {
-  int index;
   String selectedRoute;
   Function onSelectRoute;
 

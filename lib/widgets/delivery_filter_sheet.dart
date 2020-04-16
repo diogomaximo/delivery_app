@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 
 class DeliveryFilterSheet extends StatefulWidget {
   String selectedRoute = "1";
+  String viewMode = "";
 
-  DeliveryFilterSheet(this.selectedRoute);
+  DeliveryFilterSheet(this.selectedRoute, this.viewMode);
 
   @override
   _DeliveryFilterSheetState createState() => _DeliveryFilterSheetState();
@@ -63,22 +64,27 @@ class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
     return [
       RoutesList((routeString) {
         setState(() {
+          widget.selectedRoute = routeString;
           height = 840;
           isMapView = false;
         });
       }, widget.selectedRoute),
-      RouteDetails(),
+      RouteDetails(widget.selectedRoute),
 //      (isMapView ? SizedBox.shrink() : RouteDetails()),
       (isMapView ? Spacer() : SizedBox.shrink()),
-      BottomButtons((selectedOption) {
-        setState(() {
-          isMapView = selectedOption == "Map";
-          height = isMapView ? 310 : 840;
-        });
+      BottomButtons(widget.viewMode, (selectedOption) {
+        changeViewMode(selectedOption);
       })
     ];
   }
 
+  void changeViewMode(selectedOption){
+    widget.selectedRoute = selectedOption;
+    setState(() {
+      isMapView = selectedOption == "Map";
+      height = isMapView ? 310 : 840;
+    });
+  }
 
   BoxDecoration mainContainerDecoration() {
     return BoxDecoration(
