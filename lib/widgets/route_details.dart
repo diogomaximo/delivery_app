@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RouteDetails extends StatefulWidget {
-  String selectedOption;
+  String selectedOption = "";
+  Function finishRoute;
 
-  RouteDetails(this.selectedOption);
+  RouteDetails(this.selectedOption, this.finishRoute);
 
 
   @override
@@ -236,9 +237,12 @@ class _RouteDetailsState extends State<RouteDetails> {
         width: 170,
         height: 50,
         child: FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            widget.finishRoute();
+          },
           color: backgroundColor,
           shape: RoundedRectangleBorder(
+
               borderRadius: new BorderRadius.circular(20),
               side: BorderSide(color: Colors.black26, width: 1)),
           child: Row(

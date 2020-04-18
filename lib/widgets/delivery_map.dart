@@ -19,7 +19,7 @@ class DeliveryMap extends StatefulWidget {
 class _DeliveryMapState extends State<DeliveryMap> {
 
 
-  String selectedButton = "4";
+  String selectedButton = "";
   Set<Marker> markers = Set();
 
   void initState(){

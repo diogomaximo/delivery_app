@@ -6,26 +6,30 @@ import 'package:delivery_app/widgets/routes_list.dart';
 import 'package:flutter/material.dart';
 
 class DeliveryFilterSheet extends StatefulWidget {
-  String selectedRoute = "1";
-  String viewMode = "";
 
-  DeliveryFilterSheet(this.selectedRoute, this.viewMode);
+
+  DeliveryFilterSheet(this.selectedRoute, this.viewMode, {Key key}) : super(key: key);
+
+  String selectedRoute = "1";
+  String viewMode = "Map";
 
   @override
-  _DeliveryFilterSheetState createState() => _DeliveryFilterSheetState();
+  DeliveryFilterSheetState createState() => DeliveryFilterSheetState();
 }
 
-class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
+class DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
   double height = 140;
   bool isAnimating = true;
   bool isMapView = true;
+
+
 
   @override
   void initState() {
     super.initState();
     Timer(Duration(seconds: 4), () {
       setState(() {
-        height = 310; //840
+        height = 310;
         isAnimating = true;
       });
     });
@@ -65,21 +69,25 @@ class _DeliveryFilterSheetState extends State<DeliveryFilterSheet> {
       RoutesList((routeString) {
         setState(() {
           widget.selectedRoute = routeString;
+          widget.viewMode = "List";
           height = 840;
           isMapView = false;
         });
       }, widget.selectedRoute),
-      RouteDetails(widget.selectedRoute),
-//      (isMapView ? SizedBox.shrink() : RouteDetails()),
+      (isMapView ?  SizedBox.shrink() : RouteDetails(widget.selectedRoute, (){
+        changeViewMode("Map");
+      })),
+
       (isMapView ? Spacer() : SizedBox.shrink()),
       BottomButtons(widget.viewMode, (selectedOption) {
         changeViewMode(selectedOption);
+        widget.viewMode = selectedOption;
       })
     ];
   }
 
   void changeViewMode(selectedOption){
-    widget.selectedRoute = selectedOption;
+    widget.viewMode = selectedOption;
     setState(() {
       isMapView = selectedOption == "Map";
       height = isMapView ? 310 : 840;

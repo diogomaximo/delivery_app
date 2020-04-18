@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 class BottomButtons extends StatefulWidget {
   @override
   Function changeMode;
-  String selectedOption = "Map";
+  String viewType = "Map";
+  String viewMode2 = "Map";
 
-  BottomButtons(this.selectedOption, this.changeMode);
+
+
+  BottomButtons(this.viewType, this.changeMode);
   _BottomButtonsState createState() => _BottomButtonsState();
 }
 
@@ -15,7 +18,7 @@ class _BottomButtonsState extends State<BottomButtons> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: (widget.selectedOption == "Map" ? Colors.transparent : Colors.white ) ,
+      color: (widget.viewType == "Map" ? Colors.transparent : Colors.white ) ,
       height: 120,
       child: Container(
         decoration: new BoxDecoration(
@@ -70,10 +73,10 @@ class _BottomButtonsState extends State<BottomButtons> {
   }
 
   Widget rounderButton(String text) {
-    Color backgroundColor = (text == widget.selectedOption
+    Color backgroundColor = (text == widget.viewType
         ? Color.fromRGBO(238, 228, 253, 1)
         : Colors.transparent);
-    Color textColor = (text == widget.selectedOption
+    Color textColor = (text == widget.viewType
         ? Color.fromRGBO(111, 42, 244, 1)
         : Color.fromRGBO(198, 188, 212, 1));
 
@@ -85,13 +88,13 @@ class _BottomButtonsState extends State<BottomButtons> {
             borderRadius: new BorderRadius.circular(60),
             side: BorderSide(color: Colors.white, width: 1)),
         child: Text(
-          text, //text,
+          text , //text,
           textAlign: TextAlign.center,
           style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
         ),
         onPressed: () {
           setState(() {
-            widget.selectedOption = text;
+            widget.viewType = text;
            widget.changeMode(text);
           });
         },
