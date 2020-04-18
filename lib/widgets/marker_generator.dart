@@ -26,6 +26,7 @@ class MarkerGenerator {
     OverlayEntry entry = OverlayEntry(
         builder: (context) {
           return _MarkerHelper(
+
             markerWidgets: markerWidgets,
             callback: callback,
           );

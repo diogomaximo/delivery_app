@@ -4,7 +4,7 @@
 
 ### This project is a proof of concept of this dribbble design using flutter.
 
-![Alt text](cards.gif?raw=true)
+![Alt text](delivery.gif?raw=true)
 
 - Dribble design
 

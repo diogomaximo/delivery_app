@@ -48,12 +48,14 @@ class _DeliveryMapState extends State<DeliveryMap> {
     bitmaps.asMap().forEach((i, bmp) {
       final city = cities[i];
       markersList.add(Marker(
+          consumeTapEvents: false,
           onTap: (){
+            widget.onMapSelected(city.name);
             setState(() {
               selectedButton = city.name;
             });
             generate();
-            widget.onMapSelected(city.name);
+
           },
           markerId: MarkerId(city.name),
           position: city.position,
